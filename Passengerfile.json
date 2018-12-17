@@ -1,0 +1,5 @@
+{
+  "max_pool_size": 8,
+  "min_instances": 8,
+  "max_request_queue_size": 200
+}
