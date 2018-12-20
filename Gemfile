@@ -9,7 +9,7 @@ gem 'passenger', '~> 6.0', require: "phusion_passenger/rack_handler"
 
 gem 'bcrypt', '~> 3.1.7'
 gem 'doorkeeper', '~> 5.0', '>= 5.0.2'
-gem 'jbuilder', '~> 2.8'
+gem 'fast_jsonapi', '~> 1.5'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
@@ -30,8 +30,15 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry', '~> 0.12.2'
   gem 'rspec-rails', '~> 3.8', '>= 3.8.1'
+  gem 'fuubar', '~> 2.3', '>= 2.3.2'
   gem 'rubocop', '~> 0.61.1'
+end
+
+group :test do
   gem 'factory_bot_rails', '~> 4.11', '>= 4.11.1'
+  gem 'shoulda-matchers', '~> 3.1', '>= 3.1.2'
+  gem 'database_cleaner', '~> 1.7'
+  gem 'faker', '~> 1.9', '>= 1.9.1'
 end
 
 group :development do
