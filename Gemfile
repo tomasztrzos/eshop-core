@@ -29,6 +29,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry', '~> 0.12.2'
+  gem 'pry-remote', '~> 0.1.8'
   gem 'rspec-rails', '~> 3.8', '>= 3.8.1'
   gem 'fuubar', '~> 2.3', '>= 2.3.2'
   gem 'rubocop', '~> 0.61.1'
