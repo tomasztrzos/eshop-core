@@ -1,0 +1,52 @@
+steps:
+- id: 'set-up-env-dockerfile'
+  name: 'ubuntu'
+  args: ['bash','-c','sed -i "s/{ENVIRONMENT}/$_ENVIRONMENT/" ./Dockerfile']
+
+- id: 'build-image'
+  name: 'gcr.io/cloud-builders/docker'
+  args: ["build", "-t", "eshop-core-$_ENVIRONMENT:$COMMIT_SHA", "."]
+  waitFor: ['set-up-env-dockerfile']
+
+- id: 'push-image'
+  name: 'gcr.io/cloud-builders/docker'
+  args: ["push", "eshop-core-$_ENVIRONMENT:$COMMIT_SHA"]
+  waitFor: ['build-image']
+
+- id: 'set-up-commit-sha-docker-compose'
+  name: 'ubuntu'
+  args: ['bash','-c','sed -i "s/{COMMIT_SHA}/$COMMIT_SHA/" ./docker-compose.yml']
+
+- id: 'set-up-env-docker-compose'
+  name: 'ubuntu'
+  args: ['bash','-c','sed -i "s/{ENVIRONMENT}/$_ENVIRONMENT/" ./docker-compose.yml']
+
+- id: 'set-up-and-run-rspec'
+  name: 'docker/compose:1.15.0'
+  args: ['run', 'web', './kubernetes/test-script.sh']
+  waitFor: ['push-image','set-up-commit-sha-docker-compose','set-up-env-docker-compose']
+
+- id: 'kubectl-set-image'
+  name: 'gcr.io/cloud-builders/kubectl'
+  args:
+  - 'set'
+  - 'image'
+  - 'deploy/eshop-core'
+  - 'eshop-core-$_ENVIRONMENT:$COMMIT_SHA'
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us-central1'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=$_CLUSTER_NAME'
+  waitFor: ['set-up-and-run-rspec']
+
+- id: 'set-up-commit-sha-kubernetes-deployment'
+  name: 'ubuntu'
+  args: ['bash','-c','sed -i "s/{COMMIT_SHA}/$COMMIT_SHA/" kubernetes/deployment.yaml']
+
+- id: 'set-up-env-kubernetes-deployment'
+  name: 'ubuntu'
+  args: ['bash','-c','sed -i "s/{ENVIRONMENT}/$_ENVIRONMENT/" kubernetes/deployment.yaml']
+
+- id: 'push-kubernetes-deployment'
+  name: 'gcr.io/cloud-builders/kubectl'
+  args: ['apply','-f','kubernetes/deployment.yaml']
+  waitFor: ['set-up-commit-sha-kubernetes-deployment','set-up-env-kubernetes-deployment']

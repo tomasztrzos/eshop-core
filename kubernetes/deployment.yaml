@@ -1,0 +1,51 @@
+---
+apiVersion: "extensions/v1beta1"
+kind: "Deployment"
+metadata:
+  name: "eshop-core"
+  namespace: "default"
+  labels:
+    app: "eshop-core"
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: "eshop-core"
+  template:
+    metadata:
+      labels:
+        app: "eshop-core"
+    spec:
+      containers:
+      - name: "eshop-core"
+        image: "eshop-core-{ENVIRONMENT}:{COMMIT_SHA}"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+        env:
+          - name: RAILS_MASTER_KEY
+            valueFrom:
+              secretKeyRef:
+                name: eshop-core-secrets
+                key: rails-master-key
+---
+apiVersion: "autoscaling/v1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "eshop-core-hpa"
+  namespace: "default"
+  labels:
+    app: "eshop-core"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "eshop-core"
+    apiVersion: "apps/v1beta1"
+  minReplicas: 1
+  maxReplicas: 1
+  targetCPUUtilizationPercentage: 80
