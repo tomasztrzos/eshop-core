@@ -6,9 +6,12 @@ services:
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "true"
   web:
-    build: .
+    image: eshop-core-{ENVIRONMENT}:{COMMIT_SHA}
     volumes:
       - .:/eshop-core
+    entrypoint:
+      - /bin/sh
+      - ./kubernetes/test-script.sh
     ports:
       - "3000:3000"
     depends_on:
@@ -17,3 +20,4 @@ services:
       - db
     environment:
       DB_HOST: db
+    command: sleep infinity
