@@ -13,10 +13,6 @@ user = User.create(
   password_confirmation: 'sample123'
 )
 
-cart = Cart.create(
-  user_id: user.id
-)
-
 product_01 = Product.create(
   name: 'Lightweight down jacket',
   price: 69.99
@@ -32,6 +28,6 @@ product_03 = Product.create(
   price: 34.99
 )
 
-CartsProduct.create(product: product_01, cart: cart, amount: 1)
-CartsProduct.create(product: product_02, cart: cart, amount: 1)
-CartsProduct.create(product: product_03, cart: cart, amount: 2)
+CartsProduct.create(product: product_01, cart: user.cart, amount: 1)
+CartsProduct.create(product: product_02, cart: user.cart, amount: 1)
+CartsProduct.create(product: product_03, cart: user.cart, amount: 2)
