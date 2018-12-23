@@ -1,8 +1,7 @@
 guard :rspec, cmd: 'bundle exec rspec' do
   require 'guard/rspec/dsl'
+  require 'pry'
   dsl = Guard::RSpec::Dsl.new(self)
-
-  # Feel free to open issues for suggestions and improvements
 
   # RSpec files
   rspec = dsl.rspec
@@ -20,15 +19,25 @@ guard :rspec, cmd: 'bundle exec rspec' do
   dsl.watch_spec_files_for(rails.views)
 
   watch(rails.controllers) do |m|
-    [
-      rspec.spec.call("routing/#{m[1]}_routing"),
-      rspec.spec.call("controllers/#{m[1]}_controller"),
-      rspec.spec.call("requests/#{m[1]}")
-    ]
+    "spec/requests"
   end
+
+  # watch(rails.controllers) do |m|
+  #   [
+  #     rspec.spec.("routing/#{m[1]}_routing"),
+  #     rspec.spec.("controllers/#{m[1]}_controller"),
+  #     rspec.spec.("acceptance/#{m[1]}"),
+  #     rspec.spec.("requests/#{m[1]}")
+  #   ]
+  # end
+
+  # watch(rails.view_dirs)     { |m| rspec.spec.("features/#{m[1]}") }
 
   # Rails config changes
   watch(rails.spec_helper)     { rspec.spec_dir }
   watch(rails.routes)          { "#{rspec.spec_dir}/routing" }
   watch(rails.app_controller)  { "#{rspec.spec_dir}/controllers" }
+
+  watch('config/routes.rb')                           { 'spec/routing' }
+  watch('app/controllers/application_controller.rb')  { 'spec/requests' }
 end
