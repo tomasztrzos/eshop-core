@@ -1,4 +1,4 @@
-[Product, Cart, User].map &:delete_all
+[CartsProduct, Product, Cart, User].map &:delete_all
 
 user = User.create(
   first_name: 'John',
@@ -32,6 +32,6 @@ product_03 = Product.create(
   price: 34.99
 )
 
-cart.products << product_01
-cart.products << product_02
-cart.products << product_03
+CartsProduct.create(product: product_01, cart: cart, amount: 1)
+CartsProduct.create(product: product_02, cart: cart, amount: 1)
+CartsProduct.create(product: product_03, cart: cart, amount: 2)

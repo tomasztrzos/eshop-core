@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_23_125447) do
+ActiveRecord::Schema.define(version: 2018_12_23_143640) do
 
   create_table "carts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -19,12 +19,14 @@ ActiveRecord::Schema.define(version: 2018_12_23_125447) do
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
-  create_table "carts_products", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "cart_id", null: false
-    t.bigint "product_id", null: false
-    t.decimal "amount", precision: 10
-    t.index ["cart_id", "product_id"], name: "index_carts_products_on_cart_id_and_product_id"
-    t.index ["product_id", "cart_id"], name: "index_carts_products_on_product_id_and_cart_id"
+  create_table "carts_products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "amount"
+    t.bigint "cart_id"
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_carts_products_on_cart_id"
+    t.index ["product_id"], name: "index_carts_products_on_product_id"
   end
 
   create_table "oauth_access_grants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -92,6 +94,8 @@ ActiveRecord::Schema.define(version: 2018_12_23_125447) do
   end
 
   add_foreign_key "carts", "users"
+  add_foreign_key "carts_products", "carts"
+  add_foreign_key "carts_products", "products"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
 end
