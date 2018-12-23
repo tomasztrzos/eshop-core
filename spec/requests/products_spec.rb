@@ -50,7 +50,7 @@ RSpec.describe 'Products API', type: :request do
     context 'when the request is valid' do
       before { post '/api/v1/products', params: valid_attributes }
 
-      it 'creates a todo' do
+      it 'creates a product' do
         expect(json['attributes']['name']).to eq('Lightweight down jacket')
       end
 
