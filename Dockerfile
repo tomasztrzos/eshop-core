@@ -10,4 +10,4 @@ COPY . /eshop-core
 
 EXPOSE 3000
 
-CMD rails db:create && bundle exec passenger start -e development
+CMD bundle exec passenger start -e {ENVIRONMENT}
