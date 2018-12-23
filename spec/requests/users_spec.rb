@@ -21,7 +21,7 @@ RSpec.describe 'Users API', type: :request do
       before { post '/api/v1/users', params: valid_attributes }
 
       it 'creates a user' do
-        expect(json['data']['attributes']['email']).to eq('john.smith@gmail.com')
+        expect(json['attributes']['email']).to eq('john.smith@gmail.com')
       end
 
       it 'returns status code 201' do

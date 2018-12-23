@@ -1,6 +1,5 @@
 guard :rspec, cmd: 'bundle exec rspec' do
   require 'guard/rspec/dsl'
-  require 'pry'
   dsl = Guard::RSpec::Dsl.new(self)
 
   # RSpec files
