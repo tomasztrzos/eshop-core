@@ -1,4 +1,4 @@
-[CartsProduct, Product, Cart, User].map &:delete_all
+[OrdersProduct, Order, CartsProduct, Product, Cart, User].map &:delete_all
 
 user = User.create(
   first_name: 'John',
@@ -12,6 +12,21 @@ user = User.create(
   password: 'sample123',
   password_confirmation: 'sample123'
 )
+
+admin = User.create(
+  first_name: 'George',
+  last_name: 'Robinson',
+  street_address: 'Aleja Wilanowska 63b/2',
+  city: 'Warsaw',
+  zip_code: '02-602',
+  country: 'Poland',
+  phone_number: '502 322 180',
+  email: 's13818@pjwstk.edu.pl',
+  password: 'E3ceV7NxGGHk',
+  password_confirmation: 'E3ceV7NxGGHk'
+)
+
+admin.add_role(:admin)
 
 product_01 = Product.create(
   name: 'Lightweight down jacket',

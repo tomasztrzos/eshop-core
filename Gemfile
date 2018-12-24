@@ -6,10 +6,10 @@ ruby '2.5.3'
 gem 'rails', '~> 5.2.2'
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 gem 'passenger', '~> 6.0', require: "phusion_passenger/rack_handler"
-
 gem 'bcrypt', '~> 3.1.7'
 gem 'doorkeeper', '~> 5.0', '>= 5.0.2'
 gem 'fast_jsonapi', '~> 1.5'
+gem 'rolify', '~> 5.2'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
