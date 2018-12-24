@@ -23,7 +23,7 @@ RSpec.describe 'Carts Products API', type: :request do
     before { get "/api/v1/carts_products/#{carts_product_id}" }
 
     context 'when the record exists' do
-      it 'returns the product' do
+      it 'returns the carts product' do
         expect(json).not_to be_empty
         expect(json['id']).to eq(carts_product_id.to_s)
       end
