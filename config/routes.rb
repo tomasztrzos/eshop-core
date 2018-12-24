@@ -8,6 +8,12 @@ Rails.application.routes.draw do
       resources :products
       resources :carts_products
       resources :orders, only: %i[show create update]
+
+      namespace 'admin' do
+        resources :users
+        resources :products
+        resources :orders
+      end
     end
   end
 end
