@@ -34,7 +34,7 @@ steps:
   - 'deploy/eshop-core'
   - 'eu.gcr.io/eshop-trzos/eshop-core-$_ENVIRONMENT:$COMMIT_SHA'
   env:
-  - 'CLOUDSDK_COMPUTE_ZONE=us-central1'
+  - 'CLOUDSDK_COMPUTE_ZONE=europe-west3'
   - 'CLOUDSDK_CONTAINER_CLUSTER=$_CLUSTER_NAME'
   # waitFor: ['set-up-and-run-rspec']
 
