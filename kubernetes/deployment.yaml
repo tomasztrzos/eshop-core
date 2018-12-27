@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: "eshop-core"
-        image: "eshop-core-{ENVIRONMENT}:{COMMIT_SHA}"
+        image: "eu.gcr.io/eshop-trzos/eshop-core-{ENVIRONMENT}:{COMMIT_SHA}"
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
