@@ -7,6 +7,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+      MYSQL_ROOT_HOST: '%'
   web:
     image: eu.gcr.io/eshop-trzos/eshop-core-{ENVIRONMENT}:{COMMIT_SHA}
     volumes:
