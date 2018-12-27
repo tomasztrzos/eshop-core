@@ -21,10 +21,10 @@ steps:
   name: 'ubuntu'
   args: ['bash','-c','sed -i "s/{ENVIRONMENT}/$_ENVIRONMENT/" ./docker-compose.yml']
 
-- id: 'set-up-and-run-rspec'
-  name: 'docker/compose:1.15.0'
-  args: ['run', 'web', './kubernetes/test-script.sh']
-  waitFor: ['push-image','set-up-commit-sha-docker-compose','set-up-env-docker-compose']
+# - id: 'set-up-and-run-rspec'
+#   name: 'docker/compose:1.15.0'
+#   args: ['run', 'web', './kubernetes/test-script.sh']
+#   waitFor: ['push-image','set-up-commit-sha-docker-compose','set-up-env-docker-compose']
 
 - id: 'kubectl-set-image'
   name: 'gcr.io/cloud-builders/kubectl'
@@ -36,7 +36,7 @@ steps:
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1'
   - 'CLOUDSDK_CONTAINER_CLUSTER=$_CLUSTER_NAME'
-  waitFor: ['set-up-and-run-rspec']
+  # waitFor: ['set-up-and-run-rspec']
 
 - id: 'set-up-commit-sha-kubernetes-deployment'
   name: 'ubuntu'
