@@ -23,3 +23,5 @@ services:
     environment:
       DB_HOST: db
     command: sleep infinity
+  volumes:
+    mysql_data:
