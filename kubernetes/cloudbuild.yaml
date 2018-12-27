@@ -32,7 +32,7 @@ steps:
   - 'set'
   - 'image'
   - 'deploy/eshop-core'
-  - 'eu.gcr.io/eshop-trzos/eshop-core-$_ENVIRONMENT:$COMMIT_SHA'
+  - 'eshop-core=eu.gcr.io/eshop-trzos/eshop-core-$_ENVIRONMENT:$COMMIT_SHA'
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=europe-west3'
   - 'CLOUDSDK_CONTAINER_CLUSTER=$_CLUSTER_NAME'
