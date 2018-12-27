@@ -10,7 +10,7 @@ steps:
 
 - id: 'push-image'
   name: 'gcr.io/cloud-builders/docker'
-  args: ["push", "gcr.io/eshop-trzos/eshop-core-$_ENVIRONMENT:$COMMIT_SHA"]
+  args: ["push", "eu.gcr.io/eshop-trzos/eshop-core-$_ENVIRONMENT:$COMMIT_SHA"]
   waitFor: ['build-image']
 
 - id: 'set-up-commit-sha-docker-compose'
