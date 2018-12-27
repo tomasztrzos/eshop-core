@@ -27,12 +27,12 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
-        env:
-          - name: RAILS_MASTER_KEY
-            valueFrom:
-              secretKeyRef:
-                name: eshop-core-secrets
-                key: rails-master-key
+        # env:
+        #   - name: RAILS_MASTER_KEY
+        #     valueFrom:
+        #       secretKeyRef:
+        #         name: eshop-core-secrets
+        #         key: rails-master-key
 ---
 apiVersion: "autoscaling/v1"
 kind: "HorizontalPodAutoscaler"
