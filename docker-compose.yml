@@ -6,7 +6,7 @@ services:
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "true"
   web:
-    image: eshop-core-{ENVIRONMENT}:{COMMIT_SHA}
+    image: eu.gcr.io/eshop-trzos/eshop-core-{ENVIRONMENT}:{COMMIT_SHA}
     volumes:
       - .:/eshop-core
     entrypoint:
