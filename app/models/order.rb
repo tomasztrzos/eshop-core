@@ -5,11 +5,19 @@ class Order < ApplicationRecord
 
   validates_presence_of :status
 
+  before_create :set_slug
   after_create :associate_products_and_reset_users_cart
 
   enum status: { created: 0, accepted: 1, sent: 2, canceled: 3 }
 
   private
+
+  def set_slug
+    loop do
+      self.slug = SecureRandom.uuid
+      break unless Order.where(slug: slug).exists?
+    end
+  end
 
   def associate_products_and_reset_users_cart
     cart = user.cart
