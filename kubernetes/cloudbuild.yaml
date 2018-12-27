@@ -5,7 +5,7 @@ steps:
 
 - id: 'build-image'
   name: 'gcr.io/cloud-builders/docker'
-  args: ["build", "-t", "eshop-core-$_ENVIRONMENT:$COMMIT_SHA", "."]
+  args: ["build", "-t", "eu.gcr.io/eshop-trzos/eshop-core-$_ENVIRONMENT:$COMMIT_SHA", "."]
   waitFor: ['set-up-env-dockerfile']
 
 - id: 'push-image'
@@ -32,7 +32,7 @@ steps:
   - 'set'
   - 'image'
   - 'deploy/eshop-core'
-  - 'eshop-core-$_ENVIRONMENT:$COMMIT_SHA'
+  - 'eu.gcr.io/eshop-trzos/eshop-core-$_ENVIRONMENT:$COMMIT_SHA'
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1'
   - 'CLOUDSDK_CONTAINER_CLUSTER=$_CLUSTER_NAME'
