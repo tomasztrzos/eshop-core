@@ -5,11 +5,12 @@ ruby '2.5.3'
 
 gem 'rails', '~> 5.2.2'
 gem 'mysql2', '>= 0.4.4', '< 0.6.0'
-gem 'passenger', '~> 6.0', require: "phusion_passenger/rack_handler"
+gem 'passenger', '~> 6.0', require: 'phusion_passenger/rack_handler'
 gem 'bcrypt', '~> 3.1.7'
 gem 'doorkeeper', '~> 5.0', '>= 5.0.2'
 gem 'fast_jsonapi', '~> 1.5'
 gem 'rolify', '~> 5.2'
+gem 'google-cloud-pubsub'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
@@ -27,7 +28,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # gem 'rack-cors'
 
 group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry', '~> 0.12.2'
   gem 'pry-remote', '~> 0.1.8'
   gem 'rspec-rails', '~> 3.8', '>= 3.8.1'
@@ -50,6 +51,5 @@ group :development do
   gem 'rails-erd'
 end
 
-
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
