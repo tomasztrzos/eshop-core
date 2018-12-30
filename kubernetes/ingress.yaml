@@ -1,5 +1,6 @@
 # NODE PORTS
 
+# core - staging
 ---
 apiVersion: v1
 kind: Service
@@ -18,7 +19,26 @@ spec:
     app: eshop-core
 ---
 
-# INGRESS
+# email-sender - staging
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: es-np
+  labels:
+    app: eshop-email-sender
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 3000
+    protocol: TCP
+    name: es-port
+  selector:
+    app: eshop-email-sender
+---
+
+# INGRESS - core
 
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -32,4 +52,20 @@ spec:
         backend:
           serviceName: core-np
           servicePort: core-port
+---
+
+# INGRESS - email-sender
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: eshop-es-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: es-np
+          servicePort: es-port
 ---

@@ -7,6 +7,7 @@ class Order < ApplicationRecord
 
   before_create :set_slug
   after_create :associate_products_and_reset_users_cart
+  after_create :add_to_queue
 
   enum status: { created: 0, accepted: 1, sent: 2, canceled: 3 }
 
@@ -33,6 +34,13 @@ class Order < ApplicationRecord
       end
 
       cart.reset_elements
+    end
+  end
+
+  def add_to_queue
+    if Rails.env.eql? 'staging'
+      hash = OrderService.new(id: id).get_summary_hash
+      GoogleCloud::PubSubAdapter.enqueue_email(hash)
     end
   end
 end

@@ -10,7 +10,11 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'doorkeeper', '~> 5.0', '>= 5.0.2'
 gem 'fast_jsonapi', '~> 1.5'
 gem 'rolify', '~> 5.2'
-gem 'google-cloud-pubsub'
+
+# Google Cloud Platform
+gem 'google-cloud-pubsub', '~> 0.33.2'
+gem 'googleauth'
+gem 'google-cloud-storage', '~> 1.15'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
