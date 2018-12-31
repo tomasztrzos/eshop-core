@@ -46,23 +46,15 @@ metadata:
   name: eshop-ingress
 spec:
   rules:
-  - http:
+  - host: core.trzos-tomasz.pl
+    http:
       paths:
       - path: /*
         backend:
           serviceName: core-np
           servicePort: core-port
----
-
-# INGRESS - email-sender
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: eshop-es-ingress
-spec:
-  rules:
-  - http:
+  - host: email-sender.trzos-tomasz.pl
+    http:
       paths:
       - path: /*
         backend:
