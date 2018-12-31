@@ -12,7 +12,7 @@ module GoogleCloud
     end
 
     def self.pubsub_email_topic
-      @pubsub_topic ||= "projects/joblovin-suh/topics/email-#{Rails.env}"
+      @pubsub_topic ||= "projects/eshop-trzos/topics/email-#{Rails.env}"
     end
 
     def self.enqueue_email(hash)
