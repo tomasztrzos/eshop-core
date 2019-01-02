@@ -23,7 +23,7 @@ class OrderService
 
     {
       slug: @order.slug,
-      created_at: @order.created_at.to_s,
+      created_at: @order.created_at.strftime("%H:%M, %d-%m-%Y"),
       total_price: total_price_of_order,
       products: products_array,
       orders_shipping_details: orders_shipping_details_hash
