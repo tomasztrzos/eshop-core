@@ -25,7 +25,23 @@ class OrderService
       slug: @order.slug,
       created_at: @order.created_at.to_s,
       total_price: total_price_of_order,
-      products: products_array
+      products: products_array,
+      orders_shipping_details: orders_shipping_details_hash
+    }
+  end
+
+  private
+
+  def orders_shipping_details_hash
+    user = @order.user
+
+    {
+      email: user.email,
+      phone_number: user.phone_number,
+      street_address: user.street_address,
+      zip_code: user.zip_code,
+      city: user.city,
+      country: user.country
     }
   end
 end

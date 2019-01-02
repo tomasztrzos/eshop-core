@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_27_175227) do
+ActiveRecord::Schema.define(version: 2019_01_02_193350) do
 
   create_table "carts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(version: 2018_12_27_175227) do
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
-    t.decimal "price", precision: 10
+    t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
