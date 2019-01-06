@@ -23,11 +23,11 @@ class OrderService
 
     {
       slug: @order.slug,
-      created_at: @order.created_at.strftime("%H:%M, %d-%m-%Y"),
-      total_price: total_price_of_order,
+      created_at: @order.created_at.strftime('%H:%M, %d-%m-%Y'),
+      total_price: total_price_of_order.round(2),
       products: products_array,
       orders_shipping_details: orders_shipping_details_hash
-    }
+    }.to_json
   end
 
   private
