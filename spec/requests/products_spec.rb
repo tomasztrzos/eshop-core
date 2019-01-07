@@ -1,8 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe 'Products API', type: :request do
+  let!(:user) { FactoryBot.create(:user) }
   let!(:products) { create_list(:product, 10) }
   let(:product_id) { products.first.id }
+
+  login_user
 
   describe 'GET /api/v1/products' do
     before { get '/api/v1/products' }
@@ -18,7 +21,7 @@ RSpec.describe 'Products API', type: :request do
   end
 
   describe 'GET /api/v1/products/:id' do
-    before { get "/api/v1/products/#{product_id}" }
+    before { get "/api/v1/products/#{product_id}", headers: { 'Authorization': access_token } }
 
     context 'when the record exists' do
       it 'returns the product' do
@@ -48,7 +51,7 @@ RSpec.describe 'Products API', type: :request do
     let(:valid_attributes) { { name: 'Lightweight down jacket', price: 39.99 } }
 
     context 'when the request is valid' do
-      before { post '/api/v1/products', params: valid_attributes }
+      before { post '/api/v1/products', params: valid_attributes, headers: { 'Authorization': access_token } }
 
       it 'creates a product' do
         expect(json['attributes']['name']).to eq('Lightweight down jacket')
@@ -60,7 +63,7 @@ RSpec.describe 'Products API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/api/v1/products', params: { name: 'Lightweight down jacket' } }
+      before { post '/api/v1/products', params: { name: 'Lightweight down jacket' }, headers: { 'Authorization': access_token } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -77,7 +80,7 @@ RSpec.describe 'Products API', type: :request do
     let(:valid_attributes) { { name: 'Lightweight down jacket' } }
 
     context 'when the record exists' do
-      before { put "/api/v1/products/#{product_id}", params: valid_attributes }
+      before { put "/api/v1/products/#{product_id}", params: valid_attributes, headers: { 'Authorization': access_token } }
 
       it 'returns the product' do
         expect(json).not_to be_empty
