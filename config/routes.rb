@@ -7,12 +7,10 @@ Rails.application.routes.draw do
       resources :users, only: %i[show create update]
       resources :products
       resources :carts_products
-      resources :orders, only: %i[show create update]
+      resources :orders, only: %i[index show create update]
 
       namespace 'admin' do
-        resources :users
-        resources :products
-        resources :orders
+        resources :orders, only: %i[index show update]
       end
     end
   end

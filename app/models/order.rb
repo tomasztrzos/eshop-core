@@ -9,6 +9,8 @@ class Order < ApplicationRecord
   after_create :associate_products_and_reset_users_cart
   after_create :add_to_queue
 
+  scope :owned_by, ->(user) { where(user: user) }
+
   enum status: { created: 0, accepted: 1, sent: 2, canceled: 3 }
 
   private

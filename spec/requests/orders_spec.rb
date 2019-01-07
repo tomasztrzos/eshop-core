@@ -7,8 +7,12 @@ RSpec.describe 'Orders API', type: :request do
   let!(:order) { FactoryBot.create(:order) }
   let(:order_id) { order.id }
 
+  login_user
+
   describe 'GET /api/v1/orders/:id' do
-    before { get "/api/v1/orders/#{order_id}" }
+    before do
+      get "/api/v1/orders/#{order_id}", headers: { 'Authorization': access_token }
+    end
 
     context 'when the record exists' do
       it 'returns the order' do
@@ -47,7 +51,7 @@ RSpec.describe 'Orders API', type: :request do
     let(:valid_attributes) { { user_id: user.id, status: 'created' } }
 
     context 'when the request is valid' do
-      before { post '/api/v1/orders', params: valid_attributes }
+      before { post '/api/v1/orders', params: valid_attributes, headers: { 'Authorization': access_token } }
 
       it 'creates a order with corrent amount of products' do
         expect(
@@ -61,7 +65,7 @@ RSpec.describe 'Orders API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/api/v1/orders', params: { statust: 'created' } }
+      before { post '/api/v1/orders', params: { statust: 'created' }, headers: { 'Authorization': access_token } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -78,7 +82,7 @@ RSpec.describe 'Orders API', type: :request do
     let(:valid_attributes) { { status: 'sent' } }
 
     context 'when the record exists' do
-      before { put "/api/v1/orders/#{order_id}", params: valid_attributes }
+      before { put "/api/v1/orders/#{order_id}", params: valid_attributes, headers: { 'Authorization': access_token } }
 
       it 'returns the product' do
         expect(json).not_to be_empty

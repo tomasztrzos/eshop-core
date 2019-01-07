@@ -1,5 +1,11 @@
 class Api::V1::OrdersController < ApplicationController
 
+  def index
+    load_orders
+
+    json_response(@orders)
+  end
+
   def show
     load_order
 
@@ -25,6 +31,10 @@ class Api::V1::OrdersController < ApplicationController
   end
 
   def load_order
-    @order = Order.find(params[:id])
+    @order = Order.owned_by(current_user).find(params[:id])
+  end
+
+  def load_orders
+    @orders = Order.owned_by(current_user)
   end
 end
