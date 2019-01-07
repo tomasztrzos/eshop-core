@@ -10,5 +10,9 @@ FactoryBot.define do
     email { Faker::Internet.unique.email }
     password { 'B7EFU4c6' }
     password_confirmation { 'B7EFU4c6' }
+
+    factory :admin do
+      after(:create) { |user| user.add_role(:admin) }
+    end
   end
 end

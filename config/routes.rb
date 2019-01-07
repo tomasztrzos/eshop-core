@@ -5,11 +5,13 @@ Rails.application.routes.draw do
   namespace 'api' do
     namespace 'v1' do
       resources :users, only: %i[show create update]
-      resources :products
+      resources :products, only: %i[index show]
       resources :carts_products
-      resources :orders, only: %i[index show create update]
+      resources :orders, only: %i[index show create]
 
       namespace 'admin' do
+        resources :users
+        resources :products
         resources :orders, only: %i[index show update]
       end
     end

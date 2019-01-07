@@ -17,13 +17,6 @@ class Api::V1::OrdersController < ApplicationController
     json_response(@order, :created)
   end
 
-  def update
-    load_order
-
-    @order.update!(order_params)
-    json_response(@order)
-  end
-
   private
 
   def order_params

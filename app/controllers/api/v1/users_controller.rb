@@ -1,10 +1,8 @@
-# TODO: Change name of controller to something related with current_user
-
 class Api::V1::UsersController < ApplicationController
   before_action :doorkeeper_authorize!, except: [:create]
 
   def show
-    json_response(current_user)
+    json_response(@user)
   end
 
   def create

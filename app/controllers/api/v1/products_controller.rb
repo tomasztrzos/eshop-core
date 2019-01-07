@@ -12,25 +12,6 @@ class Api::V1::ProductsController < ApplicationController
     json_response(@product)
   end
 
-  def create
-    @product = Product.create!(product_params)
-    json_response(@product, :created)
-  end
-
-  def update
-    load_product
-
-    @product.update!(product_params)
-    json_response(@product)
-  end
-
-  def destroy
-    load_product
-
-    @product.destroy!
-    json_response({}, :no_content)
-  end
-
   private
 
   def product_params
