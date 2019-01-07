@@ -6,8 +6,10 @@ RSpec.describe 'Carts Products API', type: :request do
   let!(:carts_products) { create_list(:carts_product, 10) }
   let(:carts_product_id) { carts_products.first.id }
 
+  login_user
+
   describe 'GET /api/v1/carts_products' do
-    before { get '/api/v1/carts_products', params: { cart_id: user.cart.id } }
+    before { get '/api/v1/carts_products', params: { cart_id: user.cart.id }, headers: { 'Authorization': access_token } }
 
     it 'returns products' do
       expect(json).not_to be_empty
@@ -20,7 +22,7 @@ RSpec.describe 'Carts Products API', type: :request do
   end
 
   describe 'GET /api/v1/products/:id' do
-    before { get "/api/v1/carts_products/#{carts_product_id}" }
+    before { get "/api/v1/carts_products/#{carts_product_id}", headers: { 'Authorization': access_token } }
 
     context 'when the record exists' do
       it 'returns the carts product' do
@@ -50,7 +52,7 @@ RSpec.describe 'Carts Products API', type: :request do
     let(:valid_attributes) { { cart_id: user.cart.id, product_id: products.last.id, amount: 1 } }
 
     context 'when the request is valid' do
-      before { post '/api/v1/carts_products', params: valid_attributes }
+      before { post '/api/v1/carts_products', params: valid_attributes, headers: { 'Authorization': access_token } }
 
       it 'creates a carts product - cart_id' do
         expect(json['relationships']['cart']['data']['id']).to eq(user.cart.id.to_s)
@@ -87,7 +89,7 @@ RSpec.describe 'Carts Products API', type: :request do
     let(:valid_attributes) { { amount: 2 } }
 
     context 'when the record exists' do
-      before { put "/api/v1/carts_products/#{carts_product_id}", params: valid_attributes }
+      before { put "/api/v1/carts_products/#{carts_product_id}", params: valid_attributes, headers: { 'Authorization': access_token } }
 
       it 'returns the product' do
         expect(json).not_to be_empty
@@ -101,7 +103,7 @@ RSpec.describe 'Carts Products API', type: :request do
   end
 
   describe 'DELETE /api/v1/carts_products/:id' do
-    before { delete "/api/v1/carts_products/#{carts_product_id}" }
+    before { delete "/api/v1/carts_products/#{carts_product_id}", headers: { 'Authorization': access_token } }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)
