@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
       namespace 'admin' do
         resources :users
-        resources :products
+        resources :products, only: %i[create update destroy]
         resources :orders, only: %i[index show update]
       end
     end
