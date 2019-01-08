@@ -14,10 +14,6 @@ class Api::V1::ProductsController < ApplicationController
 
   private
 
-  def product_params
-    params.permit(:name, :price)
-  end
-
   def load_product
     @product = Product.find(params[:id])
   end
