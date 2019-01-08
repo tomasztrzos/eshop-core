@@ -9,7 +9,7 @@ RSpec.describe 'Carts Products API', type: :request do
   login_user
 
   describe 'GET /api/v1/carts_products' do
-    before { get '/api/v1/carts_products', params: { cart_id: user.cart.id }, headers: { 'Authorization': access_token } }
+    before { get '/api/v1/carts_products', headers: { 'Authorization': access_token } }
 
     it 'returns products' do
       expect(json).not_to be_empty
@@ -21,7 +21,7 @@ RSpec.describe 'Carts Products API', type: :request do
     end
   end
 
-  describe 'GET /api/v1/products/:id' do
+  describe 'GET /api/v1/carts_products/:id' do
     before { get "/api/v1/carts_products/#{carts_product_id}", headers: { 'Authorization': access_token } }
 
     context 'when the record exists' do
@@ -49,7 +49,7 @@ RSpec.describe 'Carts Products API', type: :request do
   end
 
   describe 'POST /api/v1/carts_products' do
-    let(:valid_attributes) { { cart_id: user.cart.id, product_id: products.last.id, amount: 1 } }
+    let(:valid_attributes) { { product_id: products.last.id, amount: 1 } }
 
     context 'when the request is valid' do
       before { post '/api/v1/carts_products', params: valid_attributes, headers: { 'Authorization': access_token } }
@@ -72,7 +72,7 @@ RSpec.describe 'Carts Products API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/api/v1/carts_products', params: { amount: 1 } }
+      before { post '/api/v1/carts_products', params: { amount: 1 }, headers: { 'Authorization': access_token } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -80,7 +80,7 @@ RSpec.describe 'Carts Products API', type: :request do
 
       it 'returns a validation failure message' do
         expect(response.body)
-          .to match(/Validation failed: Cart must exist/)
+          .to match(/Validation failed: Product must exist/)
       end
     end
   end

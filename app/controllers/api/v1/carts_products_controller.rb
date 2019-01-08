@@ -33,7 +33,7 @@ class Api::V1::CartsProductsController < ApplicationController
   private
 
   def carts_products_params
-    params.permit(:cart_id, :product_id, :amount)
+    params.permit(:product_id, :amount).merge(cart_id: current_user.cart.id)
   end
 
   def load_carts_product
@@ -41,6 +41,7 @@ class Api::V1::CartsProductsController < ApplicationController
   end
 
   def load_carts_products
-    @carts_products = CartsProduct.joins(:cart).where(cart_id: params[:cart_id])
+    cart_id = current_user.cart.id
+    @carts_products = CartsProduct.joins(:cart).where(cart_id: cart_id)
   end
 end
