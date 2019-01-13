@@ -21,11 +21,11 @@ class Api::V1::OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(:status, :user_id)
+    params.permit(:status).tap { |p| p[:user_id] = current_user.id }
   end
 
   def load_order
-    @order = Order.owned_by(current_user).find(params[:id])
+    @order = Order.owned_by(current_user).find_by(params[:slug])
   end
 
   def load_orders

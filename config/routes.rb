@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   namespace 'api' do
     namespace 'v1' do
-      resources :users, only: %i[show create update]
+      get 'users/current_user', to: 'users#show'
+      put 'users/current_user', to: 'users#update'
+      resources :users, only: %i[create update]
       resources :products, only: %i[index show]
       resources :carts_products
       resources :orders, only: %i[index show create]

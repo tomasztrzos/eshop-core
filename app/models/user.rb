@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validates_length_of :password, minimum: 6, on: :create
   validates_presence_of :password, on: :create
   validates_presence_of :email, on: :create
-  validates_uniqueness_of email:
+  validates_uniqueness_of :email
 
   after_create :create_cart_and_associate
 
