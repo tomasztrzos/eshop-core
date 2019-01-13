@@ -2,6 +2,8 @@ class Api::V1::UsersController < ApplicationController
   before_action :doorkeeper_authorize!, except: [:create]
 
   def show
+    load_user
+
     json_response(@user)
   end
 
