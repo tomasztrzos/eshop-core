@@ -1,24 +1,51 @@
-# README
+# Engineering Thesis: eshop-core
+### Tomasz Trzos
+### Student of Polish-Japanese Academy of Information Technology
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## License
 
-Things you may want to cover:
+© 2018 Tomasz Trzos all rights reserved.
 
-* Ruby version
+## General Information
 
-* System dependencies
+- Ruby 2.5.3
+- Rails 5.2.2
+- MySQL 7.6
+- Docker 18.06.1
+- Google Cloud Platform
 
-* Configuration
+## API documentation
 
-* Database creation
+1. Download application
 
-* Database initialization
+https://www.getpostman.com/
 
-* How to run the test suite
+2. Import `eshop-core-gcp.postman_collection.json` from `/postman_documentation`
 
-* Services (job queues, cache servers, search engines, etc.)
+## Installation
 
-* Deployment instructions
+1. Get the code. Clone git repository.
 
-* ...
+2. Download and install Docker
+
+https://www.docker.com/products/docker-engine
+
+3. To run the project:
+
+```
+bundle exec passenger start
+```
+
+## Running the tests
+
+1. You can run all tests using this command:
+
+```
+rspec spec
+```
+
+2. You can use 'guard' gem to monitor changes in your code and runs tests automatically:
+
+```
+bundle exec guard
+``
