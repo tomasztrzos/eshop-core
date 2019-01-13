@@ -8,7 +8,7 @@ RSpec.describe 'Products API', type: :request do
   login_user
 
   describe 'GET /api/v1/products' do
-    before { get '/api/v1/products' }
+    before { get '/api/v1/products', headers: { 'Authorization': access_token } }
 
     it 'returns products' do
       expect(json).not_to be_empty

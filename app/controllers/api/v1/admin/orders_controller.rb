@@ -27,7 +27,7 @@ class Api::V1::Admin::OrdersController < ApplicationController
   end
 
   def load_order
-    @order = Order.find_by!(slug: params[:id])
+    @order = Order.find_by!(slug: params[:slug])
   end
 
   def load_orders

@@ -9,12 +9,12 @@ Rails.application.routes.draw do
       resources :users, only: %i[create update]
       resources :products, only: %i[index show]
       resources :carts_products
-      resources :orders, only: %i[index show create]
+      resources :orders, only: %i[index show create], param: :slug
 
       namespace 'admin' do
         resources :users
         resources :products, only: %i[create update destroy]
-        resources :orders, only: %i[index show update]
+        resources :orders, only: %i[index show update], param: :slug
       end
     end
   end
