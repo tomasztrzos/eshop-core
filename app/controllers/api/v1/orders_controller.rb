@@ -25,7 +25,7 @@ class Api::V1::OrdersController < ApplicationController
   end
 
   def load_order
-    @order = Order.owned_by(current_user).find_by(params[:slug])
+    @order = Order.owned_by(current_user).find_by(slug: params[:slug])
   end
 
   def load_orders
