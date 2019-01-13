@@ -10,6 +10,8 @@ module Response
   def serializable_hash(object)
     class_name = if object.try(:first)
                    object.first.class.name
+                 elsif object.try(:empty?)
+                   object.model.name
                  else
                    object.class.name
                  end
