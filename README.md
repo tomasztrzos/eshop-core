@@ -1,6 +1,5 @@
 # Engineering Thesis: eshop-core
-### Tomasz Trzos
-### Student of Polish-Japanese Academy of Information Technology
+### Tomasz Trzos, Student of Polish-Japanese Academy of Information Technology
 
 ## License
 
