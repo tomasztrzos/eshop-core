@@ -1,4 +1,5 @@
 class Api::V1::OrdersController < ApplicationController
+  before_action :doorkeeper_authorize!
 
   def index
     load_orders

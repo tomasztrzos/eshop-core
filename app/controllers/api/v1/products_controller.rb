@@ -1,4 +1,5 @@
 class Api::V1::ProductsController < ApplicationController
+  before_action :doorkeeper_authorize!
 
   def index
     load_products
