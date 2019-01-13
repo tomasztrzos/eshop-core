@@ -1,4 +1,5 @@
 class Api::V1::Admin::OrdersController < ApplicationController
+  before_action :doorkeeper_authorize!
 
   def index
     load_orders
@@ -26,7 +27,7 @@ class Api::V1::Admin::OrdersController < ApplicationController
   end
 
   def load_order
-    @order = Order.find(params[:slug])
+    @order = Order.find_by(params[:slug])
   end
 
   def load_orders

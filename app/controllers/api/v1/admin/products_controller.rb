@@ -1,5 +1,6 @@
 class Api::V1::Admin::ProductsController < Api::V1::Admin::BaseController
-  
+  before_action :doorkeeper_authorize!
+
   def create
     @product = Product.create!(product_params)
     json_response(@product, :created)

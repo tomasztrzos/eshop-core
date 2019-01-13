@@ -1,4 +1,5 @@
 class Api::V1::Admin::UsersController < Api::V1::Admin::BaseController
+  before_action :doorkeeper_authorize!
 
   def index
     load_users
@@ -7,6 +8,8 @@ class Api::V1::Admin::UsersController < Api::V1::Admin::BaseController
   end
 
   def show
+    load_user
+    
     json_response(@user)
   end
 
