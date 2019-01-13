@@ -22,11 +22,11 @@ class Api::V1::Admin::OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(:status, :user_id)
+    params.permit(:status)
   end
 
   def load_order
-    @order = Order.find(params[:id])
+    @order = Order.find(params[:slug])
   end
 
   def load_orders
