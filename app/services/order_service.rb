@@ -16,8 +16,8 @@ class OrderService
       products_array << {
         name: product.name,
         amount: orders_product.amount,
-        price_per_item: product.price,
-        total_price: total_price
+        price_per_item: product.price.round(2),
+        total_price: total_price.round(2)
       }
     end
 
