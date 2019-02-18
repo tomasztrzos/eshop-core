@@ -49,4 +49,7 @@ steps:
 - id: 'push-kubernetes-deployment'
   name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply','-f','kubernetes/deployment.yaml']
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=europe-west3'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=$_CLUSTER_NAME'
   waitFor: ['set-up-commit-sha-kubernetes-deployment','set-up-env-kubernetes-deployment']
